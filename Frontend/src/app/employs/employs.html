@@ -1,0 +1,120 @@
+<div class="container py-5">
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="mb-0"><i class="bi bi-search"></i> Search Employee Portal</h5>
+                </div>
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <input type="number" [(ngModel)]="searchId" class="form-control"
+                            placeholder="Enter ID (e.g. 101)">
+                        <button (click)="searchEmployee()" class="btn btn-primary" type="button">
+                            @if (isLoading()) {
+                            <span class="spinner-border spinner-border-sm me-2"></span> Searching...
+                            } @else {
+                            Find
+                            }
+                        </button>
+                    </div>
+                    @if (isLoading()) {
+                    <div class="mt-4 border rounded p-3 bg-white shadow-sm shimmer-card">
+                        <div class="placeholder-glow">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="placeholder rounded-circle me-3" style="width: 45px; height: 45px;"></div>
+                                <div class="placeholder col-6 py-2"></div>
+                            </div>
+                            <hr>
+                            <div class="placeholder col-12 mb-2"></div>
+                            <div class="placeholder col-8"></div>
+                        </div>
+                    </div>
+                    }
+                    @if (foundEmployee() && !isLoading()) {
+                    <div class="mt-4 border rounded p-3 bg-white shadow-sm">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary text-white rounded-circle px-3 py-2 me-3">
+                                {{ foundEmployee().name[0] }}
+                            </div>
+                            <h5 class="mb-0">{{ foundEmployee().name }}</h5>
+                        </div>
+                        <div class="row small">
+                            <div class="col-6 text-muted">Employee ID:</div>
+                            <div class="col-6 fw-bold text-end">{{ foundEmployee().id }}</div>
+                            <hr class="my-2">
+                            <div class="col-12 text-muted mb-1">Address Details:</div>
+                            <div class="col-12 bg-light p-2 rounded">
+                                <p class="mb-0"><strong>Building/House No:</strong> {{ foundEmployee().a?.building_no }}
+                                </p>
+                                <p class="mb-0"><strong>Locality:</strong> {{ foundEmployee().a?.landmark }}</p>
+                                <p class="mb-0"><strong>Pincode:</strong> {{ foundEmployee().a?.pincode }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    } @else if (!isLoading()) {
+                    <div class="text-center text-muted mt-5">
+                        <p>Enter an ID to view details</p>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-dark text-white py-3">
+                    <h5 class="mb-0">Registration Form</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form (ngSubmit)="onSubmit()">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">ID (Used for both)</label>
+                                <input type="number" [(ngModel)]="newEmployee.id" (ngModelChange)="syncIds()" name="id"
+                                    class="form-control border-primary" placeholder="101" required>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold">Full Name</label>
+                                <input type="text" [(ngModel)]="newEmployee.name" name="name" class="form-control"
+                                    placeholder="Enter Full Name" required>
+                            </div>
+                            <div class="col-12">
+                                <div class="bg-light p-4 rounded-3 mt-3 border">
+                                    <h6 class="text-primary mb-3 fw-bold border-bottom pb-2">
+                                        <i class="bi bi-house-door"></i> Address Information
+                                    </h6>
+                                    <div class="row g-3">
+                                        <!-- <div class="col-md-6">
+                                            <label class="form-label small text-muted">Auto-Synced Address ID</label>
+                                            <input type="number" [(ngModel)]="newEmployee.a.id" name="aid"
+                                                class="form-control bg-white" readonly disabled>
+                                            <small class="text-info">Matches Employee ID</small>
+                                        </div> -->
+                                        <div class="col-md-12">
+                                            <label class="form-label small text-muted">Building / House No</label>
+                                            <input type="text" [(ngModel)]="newEmployee.a.building_no" name="bno"
+                                                class="form-control" placeholder="Flat 204, Galaxy Apt">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="form-label small text-muted">Landmark</label>
+                                            <input type="text" [(ngModel)]="newEmployee.a.landmark" name="land"
+                                                class="form-control" placeholder="Near Railway Station">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small text-muted">Pincode</label>
+                                            <input type="number" [(ngModel)]="newEmployee.a.pincode" name="pin"
+                                                class="form-control" placeholder="000000">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 d-grid mt-4">
+                                <button type="submit" class="btn btn-success btn-lg shadow-sm">Save Employee
+                                    Record</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

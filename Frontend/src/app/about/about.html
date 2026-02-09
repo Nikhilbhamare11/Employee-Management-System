@@ -1,0 +1,42 @@
+<div class="about-container">
+    <section class="hero">
+        <h1>About Our <span class="highlight">EMS</span></h1>
+        <p>A streamlined solution designed to manage your most valuable asset: Your People.</p>
+    </section>
+
+    <section class="content-section">
+        <div class="card">
+            <h2>Our Mission</h2>
+            <p>
+                The Employee Management System (EMS) was built to eliminate the complexity of HR administration.
+                Whether you are a small startup or a large enterprise, our tool provides a central hub to
+                organize and maintain accurate employee data.
+            </p>
+        </div>
+    </section>
+
+    <section class="features-grid">
+        @for (feature of features; track feature.title) {
+        <div class="feature-card" [routerLink]="feature.path" style="cursor: pointer;">
+            <div class="icon">{{ feature.icon }}</div>
+            <h3>{{ feature.title }}</h3>
+            <p>{{ feature.desc }}</p>
+            @if (feature.title === 'Update' || feature.title === 'Add' || feature.title === 'Search' ||feature.title ===
+            'Delete') {
+            <span class="click-hint">Click to go to {{ feature.title }} Page</span>
+            }
+        </div>
+        }
+    </section>
+
+    <section class="stats">
+        <div class="stat-item">
+            <span class="number">100%</span>
+            <span class="label">Secure Data</span>
+        </div>
+        <div class="stat-item">
+            <span class="number">24/7</span>
+            <span class="label">Accessibility</span>
+        </div>
+    </section>
+</div>
