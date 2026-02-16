@@ -12,7 +12,7 @@
 	<artifactId>Employee</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Employee</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Employee project for Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
