@@ -10,5 +10,10 @@ ng serve
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
 # Install Spring Boot Application to use Backend Folder
-In Backend Folder have some java files
+In Backend Folder have Two Folder
 
+1. Address Folder
+2. Employee Folder
+
+These Folder are connected with each other using microservices...
+pom.xml have some dependencies which help to run the Backend.
