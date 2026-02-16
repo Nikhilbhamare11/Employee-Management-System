@@ -1,2 +1,51 @@
-<p>update works!</p>
-<a routerLink="delete"></a>
+<div class="container py-2">
+    <div class="ml-5 col-md-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg--warning-subtle text-white py-3">
+                <h5 class="mb-0">Update Information</h5>
+            </div>
+            <div class="card-body p-4">
+                <form (ngSubmit)="onSubmit()">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">ID (Used for both)</label>
+                            <input type="number" name="id" class="form-control border-primary" placeholder="101"
+                                required>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label fw-bold">Full Name</label>
+                            <input type="text" name="name" class="form-control" placeholder="Enter Full Name" required>
+                        </div>
+                        <div class="col-12">
+                            <div class="bg-light p-4 rounded-3 mt-3 border">
+                                <h6 class="text-primary mb-3 fw-bold border-bottom pb-2">
+                                    <i class="bi bi-house-door"></i> Address Information
+                                </h6>
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <label class="form-label small text-muted">Building / House No</label>
+                                        <input type="text" name="bno" class="form-control"
+                                            placeholder="Flat 204, Galaxy Apt">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="form-label small text-muted">Landmark</label>
+                                        <input type="text" name="land" class="form-control"
+                                            placeholder="Near Railway Station">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small text-muted">Pincode</label>
+                                        <input type="number" name="pin" class="form-control" placeholder="000000">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 d-grid mt-4">
+                            <button type="submit" class="btn btn-success btn-lg shadow-sm">Update Employee
+                                Record</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
