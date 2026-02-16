@@ -1,4 +1,4 @@
-<div class="container py-4">
+<div class="container py-2">
     <div class="row g-4 justify-content-center">
         <!-- <div class="col-md-5">
             <div class="card shadow-sm border-0 h-100">
@@ -60,17 +60,17 @@
             </div>
         </div> -->
         <div class="col-md-7">
-            <div class="card shadow-lg border-0">
+            <div class="card bg-dark-subtle shadow-lg border-0">
                 <div class="card-header bg-dark text-white py-3">
                     <h5 class="mb-0">Enter Employee Details</h5>
                 </div>
-                <div class="card-body p-4">
+                <div class="card-body p-3">
                     <form (ngSubmit)="onSubmit()">
                         <div class="row g-3">
                             <div class="col-md-4">
                                 <label class="form-label fw-bold">ID</label>
                                 <input type="number" [(ngModel)]="newEmployee.id" (ngModelChange)="syncIds()" name="id"
-                                    class="form-control border-primary" placeholder="101" required>
+                                    class="form-control" placeholder="101" required>
                             </div>
                             <div class="col-md-8">
                                 <label class="form-label fw-bold">Full Name</label>
@@ -80,30 +80,31 @@
                             <div class="col-12">
                                 <div class="bg-light p-4 rounded-3 mt-3 border">
                                     <h6 class="text-primary mb-3 fw-bold border-bottom pb-2">
-                                        <i class="bi bi-house-door"></i> Address Information
+                                        <i class="fa-regular fa-house"></i> Address Information
                                     </h6>
                                     <div class="row g-3">
                                         <div class="col-md-12">
                                             <label class="form-label small text-muted">Building/House No.</label>
                                             <input type="text" [(ngModel)]="newEmployee.a.building_no" name="bno"
-                                                class="form-control" placeholder="Flat 204, Galaxy Apt">
+                                                class="form-control" placeholder="Flat 204, Galaxy Apt" required>
                                         </div>
                                         <div class="col-md-12">
                                             <label class="form-label small text-muted">Area/Colony/Landmark</label>
                                             <input type="text" [(ngModel)]="newEmployee.a.landmark" name="land"
-                                                class="form-control" placeholder="Near Railway Station">
+                                                class="form-control" placeholder="Near Railway Station" required>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label small text-muted">Pincode</label>
                                             <input type="number" [(ngModel)]="newEmployee.a.pincode" name="pin"
-                                                class="form-control" placeholder="000000">
+                                                class="form-control" placeholder="000000" required>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 d-grid mt-4">
-                                <button type="submit" class="btn btn-success btn-lg shadow-sm">Save Employee
+                                <button type="submit" class="btn btn-outline-success btn-lg shadow-sm">Save Employee
                                     Record</button>
+                                <button type="submit" class="btn mt-2 btn-danger btn-lg shadow-sm">Reset Record</button>
                             </div>
                         </div>
                     </form>
