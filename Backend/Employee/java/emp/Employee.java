@@ -9,6 +9,7 @@ public class Employee {
 	int id;
 	String name;
 	transient Address a;
+	
 	public Address getA() {
 		return a;
 	}

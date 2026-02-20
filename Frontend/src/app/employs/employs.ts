@@ -56,7 +56,31 @@ export class Employs {
   onSubmit() {
     // Ensure they are synced one last time before saving
     this.syncIds();
-    // Step 1: Save the Address first (since Employee depends on it)
+    const targetId = this.newEmployee.id;
+
+    this.e.getEmpById(targetId).subscribe({
+      next: (e) => {
+        // If the server returns a 200 OK, the employee EXISTS.
+        if (e) {
+          alert(`Error: ID ${targetId} is already taken by ${e.name}.`);
+        }
+        else {
+          this.onSave();
+        }
+      },
+      error: (err) => {
+        if (err.status === 404) {
+          console.log("ID is unique, proceeding with registration...");
+        } else {
+          console.error("Database Error:", err);
+          alert("Connection error. Please try again later.");
+        }
+      }
+    });
+  }
+
+  onSave() {
+    // Step 3: Save the Address first (since Employee depends on it)
     this.e.saveAddress(this.newEmployee.a).subscribe({
       next: (addrRes) => {
         console.log("Address saved successfully");
