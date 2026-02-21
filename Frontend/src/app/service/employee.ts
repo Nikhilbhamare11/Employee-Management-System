@@ -23,4 +23,13 @@ export class employee {
   saveAddress(addrData: any): Observable<any> {
     return this.http.post(this.addUrl, addrData);
   }
+
+  updateEmp(id: any, newEmployee: any) {
+    throw new Error('Method not implemented.');
+  }
+
+  updateAddress(id: any, a: any) {
+    throw new Error('Method not implemented.');
+  }
+
 }

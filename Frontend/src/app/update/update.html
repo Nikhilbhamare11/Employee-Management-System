@@ -1,52 +1,89 @@
-<div class="container py-2">
-    <div class="ml-5 col-md-6">
-        <div class="card shadow-lg border-0">
-            <div class="card-header bg-warning-subtle text-warning-emphasis py-3">
-                <h5 class="mb-0">Update Information</h5>
+<div class="page-wrapper">
+    <div class="employee-card">
+        <div class="header">
+            <div class="header-icon">
+                <i class="fa-solid fa-pen-to-square"></i>
             </div>
-            <div class="card-body rounded-bottom-3 bg-dark-subtle p-4">
-                <form (ngSubmit)="onSubmit()">
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <label class="form-label fw-bold">ID</label>
-                            <input type="number" name="id" class="form-control" placeholder="101" required>
-                        </div>
-                        <div class="col-md-8">
-                            <label class="form-label fw-bold">Full Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="Enter Full Name" required>
-                        </div>
-                        <div class="col-12">
-                            <div class="bg-light p-4 rounded-3 mt-3 border">
-                                <h6 class="text-primary mb-3 fw-bold border-bottom pb-2">
-                                    <i class="fa-regular fa-house"></i> Change the Address Information if you want
-                                </h6>
-                                <div class="row g-3">
-                                    <div class="col-md-12">
-                                        <label class="form-label small text-muted">Building/House No.</label>
-                                        <input type="text" name="bno" class="form-control"
-                                            placeholder="Flat 204, Galaxy Apt">
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label class="form-label small text-muted">Area/Colony/Landmark</label>
-                                        <input type="text" name="land" class="form-control"
-                                            placeholder="Near Railway Station">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label small text-muted">Pincode</label>
-                                        <input type="number" name="pin" class="form-control" placeholder="000000">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 d-grid mt-4">
-                            <button type="submit" class="btn btn-outline-info btn-lg shadow-sm">Update Employee
-                                Record</button>
-                            <button type="reset" class="btn mt-2 btn-danger btn-lg shadow-sm">Delete Employee
-                                Record</button>
-                        </div>
-                    </div>
-                </form>
+            <div>
+                <h2>Update Employee</h2>
+                <p class="subtitle">Modify existing employee and address records</p>
             </div>
         </div>
+
+        <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm)" class="form">
+            <div class="form-row">
+                <div class="input-group">
+                    <label><i class="fa-solid fa-id-badge"></i> Employee ID</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-hashtag"></i>
+                        <input type="number" [(ngModel)]="newEmployee.id" name="id" placeholder="Enter ID to search"
+                            #idField="ngModel" (blur)="fetchEmployee()" required>
+                    </div>
+
+                    @if (idField.invalid && idField.touched) {
+                    <small class="error-text">Employee ID is required to search.</small>
+                    }
+                    @if (idNotFound) {
+                    <small class="error-text">Employee ID does not exist in our records.</small>
+                    }
+                    @if (idFound) {
+                    <small class="success-text">Record found! You can now edit the details.</small>
+                    }
+                </div>
+
+                <div class="input-group wide">
+                    <label><i class="fa-solid fa-user"></i> Full Name</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-signature"></i>
+                        <input type="text" class="input-text" [(ngModel)]="newEmployee.name" name="name"
+                            placeholder="Full Name will appear here" #nameField="ngModel" required>
+                    </div>
+                </div>
+            </div>
+            <div class="address-box">
+                <h3><i class="fa-solid fa-location-dot"></i> Address Information</h3>
+                <div class="input-group">
+                    <label>Building / House No.</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-building"></i>
+                        <input type="text" class="input-text" [(ngModel)]="newEmployee.a.building_no" name="bno"
+                            placeholder="Flat 204, Galaxy Apt" #buildField="ngModel" required>
+                    </div>
+                    @if (buildField.invalid && buildField.touched) {
+                    <small class="error-text">Building/House No. is required.</small>
+                    }
+                </div>
+                <div class="input-group">
+                    <label>Area / Landmark</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-map"></i>
+                        <input type="text" class="input-text" [(ngModel)]="newEmployee.a.landmark" name="land"
+                            placeholder="Near Railway Station" #landField="ngModel" required>
+                    </div>
+                    @if (landField.invalid && landField.touched) {
+                    <small class="error-text">Area/Landmark is required.</small>
+                    }
+                </div>
+                <div class="input-group">
+                    <label>Pincode</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="number" [(ngModel)]="newEmployee.a.pincode" name="pin" placeholder="400001"
+                            #pinField="ngModel" required>
+                    </div>
+                    @if (pinField.invalid && pinField.touched) {
+                    <small class="error-text">Pincode is required.</small>
+                    }
+                </div>
+            </div>
+            <div class="button-row">
+                <button type="submit" class="btn-primary" [disabled]="empForm.invalid || idNotFound">
+                    <i class="fa-solid fa-arrows-rotate"></i> Update Record
+                </button>
+                <button type="button" class="btn-danger" (click)="resetForm()">
+                    <i class="fa-solid fa-xmark"></i> Cancel
+                </button>
+            </div>
+        </form>
     </div>
 </div>

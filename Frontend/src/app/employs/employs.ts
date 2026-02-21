@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { employee } from '../service/employee';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-employs',
@@ -53,10 +53,15 @@ export class Employs {
   }
 
   // 2. Save Logic
-  onSubmit() {
+  onSubmit(form: NgForm) {
     // Ensure they are synced one last time before saving
     this.syncIds();
     const targetId = this.newEmployee.id;
+
+    if (form.invalid) {
+      alert("Please fill in all required information before submitting.");
+      return; // Stop the function here
+    }
 
     this.e.getEmpById(targetId).subscribe({
       next: (e) => {
