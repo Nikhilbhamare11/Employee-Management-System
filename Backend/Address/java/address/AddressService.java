@@ -36,6 +36,7 @@ public class AddressService {
 	public Address updateAddress(int id, Address ad) {
 		Address a1 = ar.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Address not found"));
 //		a1.setId(ad.getId());
+		ad.setId(id);
 		a1.setBuilding_no(ad.getBuilding_no());
 		a1.setLandmark(ad.getLandmark());
 		a1.setPincode(ad.getPincode());

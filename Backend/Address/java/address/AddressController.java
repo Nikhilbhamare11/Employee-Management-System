@@ -37,6 +37,7 @@ public class AddressController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable int id) {
 		as.deleteAddress(id);
+		System.out.println("ADDRESS SERVICE DELETE HIT");
 		return ResponseEntity.ok("Address deleted successfully");
 	}
 	

@@ -76,8 +76,8 @@ export class Update {
           // Step 2: Once address is saved, save the Employee
           this.e.updateEmp(this.newEmployee.id, this.newEmployee).subscribe({
             next: (empRes) => {
-              this.resetForm();
               alert("Both Employee and Address added successfully!");
+              this.resetForm();
             },
             error: (err) => console.error("Employee Save Failed", err)
           });
