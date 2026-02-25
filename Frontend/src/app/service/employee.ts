@@ -1,35 +1,51 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Address, Employee } from '../employee.model';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class employee {
   private http = inject(HttpClient); // Modern way to inject
   private empUrl = 'http://localhost:8081/emp'; // Port where Emp service runs
   private addUrl = 'http://localhost:8082/add'; // Port where Address service runs
 
-  getEmpById(id: number): Observable<any> {
-    return this.http.get(`${this.empUrl}/${id}`);
-  }
 
   // Method 1: Save Employee
-  saveEmployee(empData: any): Observable<any> {
-    return this.http.post(this.empUrl, empData);
+  saveEmployee(empData: Employee): Observable<Employee> {
+    return this.http.post<Employee>(this.empUrl, empData);
   }
 
-  // Method 2: Save Address
-  saveAddress(addrData: any): Observable<any> {
-    return this.http.post(this.addUrl, addrData);
+  // Save Address
+  saveAddress(addrData: Address): Observable<Address> {
+    return this.http.post<Address>(this.addUrl, addrData);
   }
 
-  updateEmp(id: any, newEmployee: any) {
-    throw new Error('Method not implemented.');
+  // Method 2: Update Employee
+  updateEmp(id: number, newEmployee: Employee): Observable<Employee> {
+    return this.http.put<Employee>(`${this.empUrl}/${id}`, newEmployee);
   }
 
-  updateAddress(id: any, a: any) {
-    throw new Error('Method not implemented.');
+  // Update Address
+  updateAddress(id: number, add: Address) {
+    return this.http.put(`${this.addUrl}/${id}`, add);
+  }
+
+  // Method 3: Get Employee
+  getEmpById(id: number): Observable<Employee> {
+    return this.http.get<Employee>(`${this.empUrl}/${id}`);
+  }
+
+  // Method 4: Delete Employee
+  deleteEmp(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.empUrl}/${id}`);
+  }
+
+  // Delete Address
+  deleteAdd(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.addUrl}/${id}`);
   }
 
 }

@@ -186,6 +186,24 @@ button:disabled {
     opacity: 0.7;
 }
 
+.delete-mini-btn {
+    margin-left: auto;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.delete-mini-btn:hover {
+    background: #ef4444;
+    color: white;
+    transform: scale(1.08);
+}
+
 /* Animation */
 @keyframes fadeIn {
     from {

@@ -12,12 +12,37 @@ export class Update {
   newEmployee: any = { id: null, name: '', a: { building_no: '', landmark: '', pincode: null } };
 
   private e = inject(employee);
-  idNotFound: boolean = false;
-  idFound: boolean = false;
+  idNotFound = false;
+  idFound = false;
+  checking = false;
+
+  handleNotFound() {
+    this.idNotFound = true;
+    this.idFound = false;
+    const currentId = this.newEmployee.id;
+    this.newEmployee = { id: currentId, name: '', a: { building_no: '', landmark: '', pincode: null } };
+    alert("Employee Data Not Found!")
+  }
+
+  resetForm() {
+    this.newEmployee = {
+      id: '',
+      name: '',
+      a: {
+        id: undefined,
+        pincode: undefined,
+        landmark: '',
+        building_no: ''
+      }
+    };
+    this.idFound = false;
+    this.checking = false;
+  }
 
   fetchEmployee() {
     const searchId = this.newEmployee.id;
     if (!searchId) return;
+    this.checking = true;
 
     this.e.getEmpById(searchId).subscribe({
       next: (data) => {
@@ -26,34 +51,32 @@ export class Update {
           this.newEmployee = data;
           this.idNotFound = false;
           this.idFound = true;
+          this.checking = false;
         } else {
           this.handleNotFound();
+          this.checking = false;
+          this.idNotFound = true;
         }
       },
       error: (err) => {
         this.handleNotFound();
+        this.checking = false;
+        this.idNotFound = true;
       }
     });
-  }
-
-  handleNotFound() {
-    this.idNotFound = true;
-    this.idFound = false;
-    // Keep the ID but clear other fields so the user doesn't edit wrong data
-    const currentId = this.newEmployee.id;
-    this.newEmployee = { id: currentId, name: '', a: { building_no: '', landmark: '', pincode: null } };
   }
 
   onSubmit(form: any) {
     if (form.valid && !this.idNotFound) {
       // Step 1: Update Address
-      this.e.saveAddress(this.newEmployee.a).subscribe({
+      // console.log(this.newEmployee.id);
+      this.e.updateAddress(this.newEmployee.id, this.newEmployee.a).subscribe({
         next: (addrRes) => {
-          console.log("Address saved successfully");
-
+          // console.log("Address saved successfully");
           // Step 2: Once address is saved, save the Employee
-          this.e.saveEmployee(this.newEmployee).subscribe({
+          this.e.updateEmp(this.newEmployee.id, this.newEmployee).subscribe({
             next: (empRes) => {
+              this.resetForm();
               alert("Both Employee and Address added successfully!");
             },
             error: (err) => console.error("Employee Save Failed", err)
@@ -67,8 +90,31 @@ export class Update {
     }
   }
 
-  resetForm() {
-    this.newEmployee = { id: 0, name: '', a: { id: 0, pincode: 0, landmark: '', building_no: '' } };
+  deleteEmpl(id: number) {
+    this.e.deleteEmp(id).subscribe({
+      next: () => {
+        this.e.deleteAdd(id).subscribe({
+          next: () => {
+            alert("Employee and Address deleted successfully");
+            this.resetForm();
+          },
+          error: () => alert("Employee deleted but Address delete failed")
+        });
+      },
+      error: (err) => {
+        console.error(err);
+        alert("Employee and Address Delete failed");
+      }
+    });
+    this.resetForm();
+  }
+
+  confirmDelete() {
+    const confirmAction = confirm(
+      `Are you sure you want to delete Employee ID ${this.newEmployee.id}?`
+    );
+    if (confirmAction) {
+      this.deleteEmpl(this.newEmployee.id);
+    }
   }
 }
-

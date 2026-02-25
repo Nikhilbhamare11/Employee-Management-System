@@ -1,17 +1,15 @@
 <div class="page-wrapper">
     <div class="employee-card">
-        <!-- Header -->
         <div class="header">
             <div class="header-icon">
                 <i class="fa-solid fa-user-tie"></i>
             </div>
             <div>
-                <h2>Employee Management</h2>
+                <h2>Employee Management System</h2>
                 <p class="subtitle">Create and manage employee records efficiently</p>
             </div>
         </div>
         <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm)" class="form">
-            <!-- Basic Info -->
             <div class="form-row">
                 <div class="input-group">
                     <label><i class="fa-solid fa-id-badge"></i> Employee ID</label>
@@ -22,6 +20,24 @@
                     </div>
                     @if (idField.invalid && idField.touched) {
                     <small class="error-text">Employee ID is required.</small>
+                    }
+                    @if (checking) {
+                    <small class="info-text">
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+                        Checking employee...
+                    </small>
+                    }
+                    @if (employeeExists) {
+                    <small class="error-text">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        Employee ID already exists!
+                    </small>
+                    }
+                    @if (!employeeExists && idField.valid && !checking) {
+                    <small class="success-text">
+                        <i class="fa-solid fa-circle-check"></i>
+                        Employee ID available.
+                    </small>
                     }
                 </div>
                 <div class="input-group wide">
@@ -75,7 +91,8 @@
             </div>
             <!-- Buttons -->
             <div class="button-row">
-                <button type="submit" class="btn-primary" [disabled]="empForm.invalid">
+                <button type="submit" class="btn-primary"
+                    [disabled]="empForm.invalid || empForm.invalid || employeeExists">
                     <i class="fa-solid fa-floppy-disk"></i> Save Employee
                 </button>
                 <button type="reset" class="btn-danger">
