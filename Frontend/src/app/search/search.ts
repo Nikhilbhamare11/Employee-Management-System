@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 export class Search {
   private e = inject(employee);
 
-  searchId: number = 0;
+  searchId: number | null = null;
   foundEmployee = signal<any>(null);
   isLoading = signal<boolean>(false);
 
@@ -29,7 +29,10 @@ export class Search {
 
   // 1. Search Logic
   searchEmployee() {
-    if (this.searchId <= 0) return alert("Employee Not Found!");
+    if (!this.searchId) {
+      alert("Enter Employee ID!");
+      return;
+    }
 
     this.isLoading.set(true);
     this.foundEmployee.set(null);
@@ -41,7 +44,6 @@ export class Search {
       }, 1500),
       error: (err) => {
         alert("Employee Not Found!");
-        this.foundEmployee.set(null);
         this.isLoading.set(false);
       }
     });
