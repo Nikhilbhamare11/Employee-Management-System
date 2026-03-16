@@ -8,11 +8,11 @@ import { Pagenf } from './pagenf/pagenf';
 
 export const routes: Routes = [
     { path: '', component: Employs },
-    { path: '**', component: Pagenf },
     { path: 'add', component: Employs },
     { path: 'search', component: Search },
     { path: 'about', component: About },
     { path: 'update', component: Update },
     { path: 'delete', component: Update },
-    { path: 'emps', component: Employees }
+    { path: 'emps', component: Employees },
+    { path: '**', component: Pagenf }
 ];

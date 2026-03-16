@@ -1,1 +1,53 @@
-<p>employees works!</p>
+<div class="page-wrapper">
+    <div class="container">
+        <!-- Website Name -->
+        <div class="header">
+            <h1>Employee Directory</h1>
+            <span class="site-name">EMS Portal</span>
+        </div>
+        <!-- Loading -->
+        @if(isLoading){
+        <p class="status-msg">Loading employees...</p>
+        }
+        <!-- Backend Error -->
+        @if(apiError){
+        <p class="status-error">
+            ⚠ Backend not connected or server error
+        </p>
+        }
+
+        <!-- No Data -->
+        @if(!isLoading && !apiError && employees.length === 0){
+        <p class="status-msg">No data found in database</p>
+        }
+
+        <!-- Employee Table -->
+        <div class="table-card">
+            @if(!isLoading && employees.length > 0){
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Building No</th>
+                        <th>Pincode</th>
+                        <th>Area</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(emp of employees; track emp.id){
+                    <tr>
+                        <td>{{emp.id}}</td>
+                        <td>{{emp.name}}</td>
+                        <td>{{emp.a?.building_no}}</td>
+                        <td>{{emp.a?.pincode}}</td>
+                        <td>{{emp.a?.landmark}}</td>
+                    </tr>
+                    }
+                </tbody>
+
+            </table>
+            }
+        </div>
+    </div>
+</div>

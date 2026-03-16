@@ -48,4 +48,8 @@ export class employee {
     return this.http.delete<void>(`${this.addUrl}/${id}`);
   }
 
+  // All Employee Details
+  getAllEmployees() {
+    return this.http.get<any>(`${this.empUrl}/all`);
+  }
 }
