@@ -11,4 +11,4 @@ There are Two Folder
 2. Employee Folder
 
 These Folder are connected with each other using microservices...
-pom.xml have some dependencies which help to run the Backend.
+pom.xml have some dependencies which help to run the Backend Folder.
