@@ -1,28 +1,36 @@
 <div class="page-wrapper">
     <div class="container">
-        <!-- Website Name -->
         <div class="header">
-            <h1>Employee Directory</h1>
+            <h1>Employees Directory</h1>
             <span class="site-name">EMS Portal</span>
         </div>
-        <!-- Loading -->
-        @if(isLoading){
-        <p class="status-msg">Loading employees...</p>
-        }
-        <!-- Backend Error -->
-        @if(apiError){
-        <p class="status-error">
-            ⚠ Backend not connected or server error
-        </p>
-        }
-
-        <!-- No Data -->
-        @if(!isLoading && !apiError && employees.length === 0){
-        <p class="status-msg">No data found in database</p>
-        }
-
-        <!-- Employee Table -->
+        <button class="pdf-btn" (click)="downloadPDF()">
+            <i class="fa-solid fa-download"></i> Download PDF
+        </button>
         <div class="table-card">
+            <!-- Loading -->
+            @if(isLoading){
+            <div class="loader-box">
+                <div class="spinner"></div>
+                <p>Loading Employees...</p>
+            </div>
+            }
+            <!-- Backend Error -->
+            @if(!isLoading && apiError){
+            <div class="error-box">
+                <h3>Server Not Connected</h3>
+                <p>Please start the backend server.</p>
+            </div>
+            }
+
+            <!-- No Data -->
+            @if(!isLoading && apiError && employees.length === 0){
+            <div class="empty-box">
+                <h3>No Employees Found</h3>
+                <p>The database currently has no employee records.</p>
+            </div>
+            }
+            <!-- Employee Table -->
             @if(!isLoading && employees.length > 0){
             <table>
                 <thead>
@@ -45,7 +53,6 @@
                     </tr>
                     }
                 </tbody>
-
             </table>
             }
         </div>

@@ -14,7 +14,7 @@
     align-items: center;
     border-radius: 15px;
     font-size: 22px;
-    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.5);
+    box-shadow: 0 8px 20px rgba(0 255 223);
 }
 
 .subtitle {
@@ -55,7 +55,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #1a2747, #1e293b);
+    background: linear-gradient(298deg, #0f3dac, #2d659c);
     font-family: 'Poppins', sans-serif;
 }
 

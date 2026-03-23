@@ -1,8 +1,8 @@
 .page-wrapper {
     min-height: 100vh;
     display: flex;
+    padding-top: 12px;
     justify-content: center;
-    align-items: center;
     background: linear-gradient(135deg, #4facfe, #00f2fe);
     font-family: 'Poppins', sans-serif;
 }
@@ -25,8 +25,8 @@
 }
 
 .site-name {
-    font-size: 13px;
-    color: white;
+    font-size: 25px;
+    color: #d425af;
     opacity: 0.8;
 }
 
@@ -59,7 +59,7 @@ th {
 /* Body */
 td {
     padding: 12px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #bcafaf;
 }
 
 /* Hover Effect */
@@ -69,17 +69,50 @@ tbody tr:hover {
     transition: 0.2s;
 }
 
-.status-msg {
+.loader-box {
     text-align: center;
-    font-size: 16px;
-    color: #555;
-    padding: 20px;
+    padding: 40px;
 }
 
-.status-error {
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 6px solid #ddd;
+    border-top: 6px solid #6366f1;
+    border-radius: 50%;
+    margin: auto;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.empty-box {
     text-align: center;
-    font-size: 16px;
-    color: red;
-    padding: 20px;
-    font-weight: 600;
+    padding: 40px;
+    color: #555;
+}
+
+.pdf-btn {
+    margin-bottom: 15px;
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.5);
+    transition: 0.3s;
+}
+
+.pdf-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(99, 102, 241, 0.7);
 }

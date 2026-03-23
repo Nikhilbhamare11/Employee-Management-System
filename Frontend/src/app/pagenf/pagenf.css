@@ -50,11 +50,13 @@
     background: linear-gradient(135deg, #6366f1, #8b5cf6);
     box-shadow: 0 8px 20px rgba(99, 102, 241, 0.5);
     transition: 0.3s;
+    text-decoration: none;
 }
 
 .home-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 30px rgba(99, 102, 241, 0.7);
+    text-decoration: underline;
 }
 
 /* Floating animation */

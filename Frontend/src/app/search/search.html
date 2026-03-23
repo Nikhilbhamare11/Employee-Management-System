@@ -1,55 +1,50 @@
-<div class="container py-2">
-    <div class="card shadow-sm border-1">
-        <div class="card-header bg-info text-dark py-3">
-            <h5 class="mb-0"><i class="fa-solid fa-magnifying-glass"></i> Search Employees</h5>
-        </div>
-        <div class="card-body">
+<div class="page-wrapper">
+    <div class="container">
+        <div class="search-card">
+            <div class="search-header">
+                <h5><i class="fa-solid fa-magnifying-glass"></i> Search Employees</h5>
+            </div>
             <div class="input-group mb-3">
-                <input type="number" [(ngModel)]="searchId" class="form-control" placeholder="Enter ID (e.g. 101)">
-                <button (click)="searchEmployee()" class="btn btn-primary" type="button">
+                <input type="number" [(ngModel)]="searchId" class="form-control search-input"
+                    placeholder="Enter ID (e.g. 101)">
+
+                <button (click)="searchEmployee()" class="search-btn">
                     @if (isLoading()) {
-                    <span class="spinner-border spinner-border-sm me-2"></span> Searching...
+                    <span class="spinner-border spinner-border-sm me-2"></span>
+                    Searching...
                     } @else {
                     Find
                     }
                 </button>
             </div>
-            @if (isLoading()) {
-            <div class="mt-4 border rounded p-3 bg-white shadow-sm shimmer-card">
-                <div class="placeholder-glow">
+
+            <!-- Employee Result -->
+            @if (foundEmployee() && !isLoading()) {
+            <div class="employee-card">
+                <div class="container border rounded p-3 bg-info-subtle shadow-sm">
                     <div class="d-flex align-items-center mb-3">
-                        <div class="placeholder rounded-circle me-3" style="width: 45px; height: 45px;"></div>
-                        <div class="placeholder col-6 py-2"></div>
+                        <div class="bg-primary text-white rounded-circle px-3 py-2 me-3">
+                            {{ foundEmployee().name[0] }}
+                        </div>
+                        <h5 class="mb-0 fs-3">{{ foundEmployee().name }}</h5>
                     </div>
-                    <hr>
-                    <div class="placeholder col-12 mb-2"></div>
-                    <div class="placeholder col-8"></div>
+                    <div class="row small">
+                        <div class="col-2 fs-4 fw-bold text-muted">Employee ID:</div>
+                        <div class="col-1 fs-5 fw-bold">{{ foundEmployee().id }}</div>
+                        <hr class="my-2">
+                        <div class="col-2 fs-4 fw-bold mb-1">Address Details:</div>
+                        <div class="col-8 fs-5 p-2 rounded">
+                            <p class="mb-0"><strong>Building/House No:</strong> {{ foundEmployee().a?.building_no }}
+                            </p>
+                            <p class="mb-0"><strong>Area/Colony/Landmark:</strong> {{ foundEmployee().a?.landmark }}</p>
+                            <p class="mb-0"><strong>Pincode:</strong> {{ foundEmployee().a?.pincode }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             }
-            @if (foundEmployee() && !isLoading()) {
-            <div class="container border rounded p-3 bg-info-subtle shadow-sm">
-                <div class="d-flex align-items-center mb-3">
-                    <div class="bg-primary text-white rounded-circle px-3 py-2 me-3">
-                        {{ foundEmployee().name[0] }}
-                    </div>
-                    <h5 class="mb-0 fs-3">{{ foundEmployee().name }}</h5>
-                </div>
-                <div class="row small">
-                    <div class="col-2 fs-4 fw-bold text-muted">Employee ID:</div>
-                    <div class="col-1 fs-5 fw-bold">{{ foundEmployee().id }}</div>
-                    <hr class="my-2">
-                    <div class="col-2 fs-4 fw-bold mb-1">Address Details:</div>
-                    <div class="col-8 fs-5 p-2 rounded">
-                        <p class="mb-0"><strong>Building/House No:</strong> {{ foundEmployee().a?.building_no }}
-                        </p>
-                        <p class="mb-0"><strong>Area/Colony/Landmark:</strong> {{ foundEmployee().a?.landmark }}</p>
-                        <p class="mb-0"><strong>Pincode:</strong> {{ foundEmployee().a?.pincode }}</p>
-                    </div>
-                </div>
-            </div>
-            } @else if (!isLoading()) {
-            <div class="text-center text-muted mt-5">
+            @if (!isLoading() && !foundEmployee()) {
+            <div class="empty-text">
                 <p>Enter an ID to view details</p>
             </div>
             }

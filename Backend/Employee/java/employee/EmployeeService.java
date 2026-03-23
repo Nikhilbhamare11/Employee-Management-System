@@ -59,7 +59,10 @@ public class EmployeeService {
 		Map<Integer, Address> addressMap = adds.stream().collect(Collectors.toMap(Address::getId, a -> a));
 		// Match employee with address
 		for (Employee e : emps) {
-			e.setA(addressMap.get(e.getId()));
+			Address address = addressMap.get(e.getId());
+	        if(address != null) {
+	            e.setA(address);
+	        }
 		}
 		return emps;
 	}

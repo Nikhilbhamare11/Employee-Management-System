@@ -40,7 +40,7 @@ public class EmployeeController {
 		return ResponseEntity.ok("Employee Deleted Successfully");
 	}
 	
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<List<Employee>> getall(){
 		return ResponseEntity.ok(es.getallEmp());
 	}

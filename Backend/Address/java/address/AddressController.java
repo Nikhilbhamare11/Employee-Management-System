@@ -41,7 +41,7 @@ public class AddressController {
 		return ResponseEntity.ok("Address deleted successfully");
 	}
 	
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<List<Address>> getall(){
 		return ResponseEntity.ok(as.getallAddress());
 	}	

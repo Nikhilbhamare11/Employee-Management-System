@@ -15,7 +15,7 @@ public interface AddressClient {
 	@GetMapping("/{id}")
 	public Address getAdd(@PathVariable("id") int id);
 
-	@GetMapping
+	@GetMapping("/all")
 	public List<Address> getAllAddress();
 	
 	@DeleteMapping("/{id}")
