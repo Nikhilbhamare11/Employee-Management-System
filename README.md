@@ -74,5 +74,7 @@ http://localhost:4200
 # Author
 
 **Nikhil Bhamare**
+
 Java Full Stack Developer | Frontend Developer
+
 Thank you for visiting this repository. If you have any feedback, suggestions, or questions, feel free to reach out or create an issue.
