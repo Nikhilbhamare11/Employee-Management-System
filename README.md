@@ -4,7 +4,7 @@
 
 The Employee Management System is a full-stack web application developed using Angular for the frontend and Spring Boot with Microservices architecture for the backend. The application enables efficient management of employee and address information through separate microservices.
 
-## Technology Stack
+## Technologies Used
 
 ### Frontend
 * Angular
